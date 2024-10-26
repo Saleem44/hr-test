@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Dependency report printing wizard-->
+    <record id="proj_offer_bonus_wiz" model="ir.ui.view">
+        <field name="name">Bonus</field>
+        <field name="model">project.bonsu.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Bonus">
+                <div>
+                    <p>
+                    Employee has Completed the monthly target, wants to offer bonus!
+                    </p>
+                </div>
+                <group>
+                    <group>
+                        <field name="task_id" invisible="1"/>
+                        <field name="bonus_offer" required="1"/>
+                    </group>
+                    <group>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Offer Bonus" name="approve_task" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

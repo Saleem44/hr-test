@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="custom_login" inherit_id="web.login">
+        <xpath expr="//div[@id='wrap']" position="replace">
+            <div id="wrap" class="o_login_split">
+                <div class="o_login_left">
+                    <div class="o_login_form">
+                        <h1>Login</h1>
+                        <form action="/web/session/authenticate" method="post">
+                            <input type="text" name="login" placeholder="Email" required />
+                            <input type="password" name="password" placeholder="Password" required />
+                            <button type="submit">Log in</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="o_login_right">
+                    <img src="/your_module/static/src/img/your_image.png" alt="Login Image" />
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

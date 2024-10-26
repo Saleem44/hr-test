@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="base.menu_management" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+
+    <record id="project.menu_project_management" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="project.menu_project_report" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="calendar.calendar_menu_config" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+    <menuitem
+        id="calendar_submenu_reminders"
+        name="Reminders"
+        sequence="50"
+        action="calendar.action_calendar_alarm"
+        parent="calendar.mail_menu_calendar"
+        groups="base.group_user"/>
+
+
+    <menuitem
+        name="My Tasks"
+        id="custom_my_tasks"
+        action="project.action_server_view_my_task"
+        parent="project.menu_main_pm"
+        sequence="2"/>
+
+    <menuitem
+        name="All Tasks"
+        id="menu_project_management_all_tasks"
+        action="project.action_view_all_task"
+        parent="project.menu_main_pm"
+        sequence="3"/>
+
+
+    <menuitem
+        name="Tasks Analysis"
+        id="menu_project_report_task_analysis"
+        action="project.action_project_task_user_tree"
+        parent="project.menu_main_pm"
+        sequence="4"/>
+
+</odoo>

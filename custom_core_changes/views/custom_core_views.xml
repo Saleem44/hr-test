@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Project -->
+    <record id="custom_project_project_view_form_simplified_inherit" model="ir.ui.view">
+        <field name="name">custom.project.project.view.form.simplified.inherit</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.project_project_view_form_simplified"/>
+        <field name="priority">25</field>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='alias_def']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('o_settings_container')]" position="after">
+                <div name="proj_planned_date_range" class="mt-4" colspan="2">
+                    <group>
+                        <group>
+                            <field name="date_start" string="Planned Date" widget="daterange" options='{"end_date_field": "date"}' required="date_start or date" />
+                            <field name="date" invisible="1" />
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Task -->
+    <record id="view_task_form2_inherit" model="ir.ui.view">
+        <field name="name">custom.task.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="priority">25</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='personal_stage_type_id']" position="replace">
+                <field name="personal_stage_type_id" widget="statusbar"  invisible="1" domain="[('user_id', '=', uid)]" string="Personal Stage"/>
+            </xpath>
+            <xpath expr="//field[@name='stage_id']" position="replace">
+                <field name="approve_reject_visibility" invisible="1"/>
+                <field name="stage_id" widget="statusbar_duration" options="{'fold_field': 'fold'}" invisible="not project_id and not stage_id"/>
+                <button name="start_task" string="Start" type="object" class="oe_highlight" invisible="(start_date and create_date) or not create_date"/>
+                <button name="submit_task" string="Submit" type="object" class="oe_highlight" invisible="(start_date and actaul_end_date) or not create_date"/>
+                <button name="cancel_task" string="Cancel" type="object" class="oe_highlight" invisible="not create_date or actaul_end_date"/>
+                <button name="approve_task" string="Approve" type="object" class="oe_highlight"
+                    invisible="not approve_reject_visibility"/>
+                <button name="reject_task" string="Reject" type="object" class="oe_highlight" 
+                    invisible="not approve_reject_visibility"/>
+                <!-- groups="project.group_project_manager" -->
+            </xpath>
+
+            <xpath expr="//field[@name='tag_ids']" position="replace">
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" invisible="1" context="{'project_id': project_id}"/>
+                <!-- <field name="description" placeholder="Add details about this task..."/> -->
+            </xpath>
+
+
+            <xpath expr="//div[@id='date_deadline_and_recurring_task']" position="after">
+                <field name="create_date" readonly="1"/>
+                <field name="start_date" readonly="1"/>
+                <field name="actaul_end_date" readonly="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='sequence']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='displayed_image_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- <xpath expr="//page[@name='description_page']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath> -->
+
+
+        </field>
+    </record>
+
+    <!-- Employee -->
+    <record id="view_employee_form_custom_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.hr.custom</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="priority" eval="60" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='mobile_phone']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="after">
+                <field name="user_id"/>
+                <field name="task_target"/>
+                <field name="current_month_percentage" readonly="1"/>
+                <field name="avg_year_percentage" readonly="1"/>
+            </xpath>
+            <xpath expr="//field[@name='category_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='coach_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='personal_information']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='public']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='hr_settings']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='hr_settings']" position="after">
+                <page string="Bonus" name="emp_bonus">
+                    <field name="bonus_ids" readonly="1">
+                        <tree>
+                            <field name="bonus_year" readonly="1"/>
+                            <field name="bonus_month_char" readonly="1" header="Month" options="{'width': '200px'}"/>
+                            <field name="performamce" readonly="1"/>
+                            <field name="bonus" readonly="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_employee_view_form_custom_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.skill.form.inherit.custom</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_skills.hr_employee_view_form" />
+        <field name="priority" eval="60" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='skills_resume']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_employee_view_tree_custom_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.tree.inherit.custom</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree" />
+        <field name="priority" eval="60" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='country_id']" position="after">
+                <field name="current_month_percentage"/>
+                <field name="avg_year_percentage"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_department_form_inherit" model="ir.ui.view">
+        <field name="name">hr.department.form.inherit.custom</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form" />
+        <field name="priority" eval="60" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']//.." position="after">
+                <group>
+                    <field name="task_target"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- Calender -->
+    <record id="view_calendar_event_form_inherit" model="ir.ui.view">
+        <field name="name">calendar.event.form.inherit.custom</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form" />
+        <field name="priority" eval="60" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='categ_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

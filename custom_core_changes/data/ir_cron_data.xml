@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data noupdate="1">
+    <record forcecreate="True" id="ir_cron_employee_bonsu_create" model="ir.cron">
+        <field name="name">Employee: Past Month Bonus</field>
+        <field name="model_id" ref="custom_core_changes.model_hr_employee"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_assign_past_month_bonus()</field>
+        <field name="active" eval="False"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+</data></odoo>

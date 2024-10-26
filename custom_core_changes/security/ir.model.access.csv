@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_project_task_bonus_user,project_task_bonus.user,custom_core_changes.model_project_task_bonus,project.group_project_user,1,0,0,0
+access_project_task_bonus_proj_manager,project_task_bonus.user,custom_core_changes.model_project_task_bonus,project.group_project_manager,1,1,1,1
+access_project_task_bonus_hr_manager,project_task_bonus.user,custom_core_changes.model_project_task_bonus,hr.group_hr_user,1,1,1,1
+
+access_project_bonsu_wiz,access_project.bonsu.wiz,custom_core_changes.model_project_bonsu_wiz,base.group_user,1,1,1,1
